@@ -151,11 +151,11 @@
     }
     .display-1{
         font-family: "Mea Culpa", serif;
-        font-size: 4rem;
+        font-size: 2rem;
     }
     .display-3{
         font-family: "Mea Culpa", serif;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
 
     .display-5{
@@ -175,6 +175,20 @@
     h4, .h4{
         font-family: "EB Garamond", serif;
     }
+
+.navbar-toggler span{
+    color: var(--bs-challenge-color);
+    font-size: 3rem;
+}
+
+    #categorydifficultyHolder{
+    min-height: 60px;
+}
+#categorydifficultyHolder div{
+    margin-top: auto;
+}
+
+
 /* radio button */
     .form-check-input{
         border-width: 0.2rem;
@@ -189,21 +203,138 @@
         border-color: var(--bs-primary-bg-subtle);
     }
 
-.framed{
-    /* Base dimensions */
-    max-width: 544px; /* Original image width */
-    width: 20%;
-    text-align: center;
-    margin: auto;
-    
-    position: relative;
-    background-image: url('/img/frame.png');
-    background-size: contain;
-    background-position: center;
 
-    aspect-ratio: 5.44/7.93; /* Modern browsers */
-    @supports not (aspect-ratio: 5.44/7.93) {
-      /* Fallback for older browsers */
-      padding-top: 145.77%; /* (793/544)*100 */
+
+/* taunt */
+    #taunt-container{
+        margin: auto;
+        margin-top: 50px;
+        width: 100%;
+        max-width: 750px;
+        height: 500px;
+        overflow: hidden;
+        position: relative;
+    }
+    #speech-bubble{
+        min-width: 200px;
+        min-height: 80px;
+        padding: 25px;
+        text-align: center;
+        position: absolute;
+        background: rgba(255, 255, 255, 0.75);
+        border-radius: 1rem;
+        z-index: 99;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    #speech-bubble:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 25%;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-top-color: rgba(255, 255, 255, 0.75);
+        border-bottom: 0;
+        border-right: 0;
+        margin-left: -10px;
+        margin-bottom: -20px;
+    }
+    #taunt-container img{
+        position: absolute;
+        z-index:1;
+        bottom: -50px;
+        right: 0;
+        width: 400px;
+    }
+
+
+@media screen and (max-width: 400px){
+    #taunt img{
+        width: 100%;
+    }
+    .display-1{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .framed{
+        /* Base dimensions */
+        width: 90px;
+        height: 131px;
+        text-align: center;
+        margin: auto;
+        
+        position: relative;
+        background-image: url('/img/frame.png');
+        background-size: contain;
+        background-position: center;
+    }
+    .display-1{
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 800px){
+    .display-1{
+        font-size: 3rem;
+    }
+    .display-3{
+        font-size: 2.4rem;
+    }
+    .framed{
+        /* Base dimensions */
+        width: 110px; 
+        height: 160px;
+    }
+}
+
+@media screen and (min-width: 900px){
+    .display-1{
+        font-size: 3.5rem;
+    }
+    .display-3{
+        font-size: 3rem;
+    }
+    .framed{
+        /* Base dimensions */
+        width: 121px; 
+        height: 176px;
+    }
+}
+
+@media screen and (min-width:1080px) {
+    .display-1{
+        font-size: 4rem;
+    }
+    .display-3{
+        font-size: 3.4rem;
+    }
+    .display-5{
+        font-size: 1.6rem;
+    }
+    .framed{
+        /* Base dimensions */
+        width: 132px; 
+        height: 192px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .display-1{
+        font-size: 5rem;
+    }
+    .display-3{
+        font-size: 4rem;
+    }
+    .display-5{
+        font-size: 1.8rem;
+    }
+    .framed{
+        /* Base dimensions */
+        width: 159.4px; 
+        height: 230.4px;
     }
 }
