@@ -27,14 +27,16 @@
           </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mt-2 col-6 d-flex flex-row justify-content-around m-auto col-12 col-sm-10 col-md-8 col-lg-6">
-            <li id="category" class="nav-item col-5">
-              <button class="btn btn-outline-dark w-100 text-light bg-challenge-color" type="button"><span class="h3">History</span></button>
-            </li>
-            <li id="difficulty" class="nav-item col-5">
-              <button class="btn btn-outline-dark w-100 text-light bg-challenge-color" type="button"><span class="h3">Hard</span></button>
-            </li>
-          </ul>
+          <div class="d-flex justify-content-around m-auto col-12 col-sm-10 col-md-8 col-lg-6">
+            <div class="col-5">
+              <label for="category" class="form-label">Category</label>
+              <select id="category" class="form-select"></select>
+            </div>
+            <div class="col-5">
+              <label for="difficulty" class="form-label">Difficulty</label>
+              <select id="difficulty" class="form-select"></select>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -46,14 +48,14 @@
             <li id="score" class="order-1 order-sm-1 col-6 col-sm-4">
               <div class="framed d-flex flex-column align-content-center justify-content-center text-center">
                 <div id="scoreTextContainer" class="d-inline-block bg-contain bg-no-repeat p-3">
-                  <p class="display-3 w-auto m-0 p-0" id="scoreNumber">02</p>
+                  <p class="display-3 w-auto m-0 p-0" id="scoreNumber">00</p>
                   <p class="display-5 m-0 p-0">Score</p>
                 </div>
               </div>
             </li>
             <li class="order-3 order-sm-2 col-8 col-sm-4 m-auto">
               <div id="questionHolder" class="h-100 p-2 align-items-center justify-content-center">
-                <h2 id="questionNumber">Question 03</h2>
+                <h2 id="questionNumber">Question 01</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh augue, vehicula quis mi id?
                 </p>
@@ -62,7 +64,7 @@
             <li id="best" class="order-2 order-sm-3 col-6 col-sm-4">
               <div class="framed d-flex flex-column align-content-center justify-content-center text-center">
                 <div id="bestTextContainer" class="d-inline-block bg-contain bg-no-repeat p-3 w-auto">
-                  <p class="display-3 w-auto m-0 p-0" id="bestNumber">08</p>
+                  <p class="display-3 w-auto m-0 p-0" id="bestNumber">00</p>
                   <p class="display-5 w-auto m-0 p-0">Best</p>
                 </div>
               </div>
@@ -117,11 +119,25 @@
               <p>Haha, there's no way you can solve this one!</p>
             </div>
             <img src="img/newton.png" alt="Isaac Newton">
+            <div class="hitbox"></div>
           </div>
         </div>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+    <script>
+      const tauntContainer = document.getElementById('taunt-container');
+      const newtonImage = document.querySelector('#taunt-container img');
+      const newtonImageHitbox = document.querySelector('#taunt-container .hitbox');
+
+      newtonImageHitbox.addEventListener('click', () => {
+        newtonImage.classList.add('click-animation');
+        setTimeout(() => {
+          newtonImage.classList.remove('click-animation');
+        }, 1000); // Duration of the animation in milliseconds
+      });
+    </script>
   </body>
 </html>
