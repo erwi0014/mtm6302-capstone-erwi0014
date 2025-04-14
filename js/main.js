@@ -25,7 +25,8 @@ const elements = {
   nextButton: document.querySelector('.btn-outline-success'),
   speechBubble: document.getElementById('speech-bubble'),
   tauntContainer: document.getElementById('taunt-container'),
-  bestScoreNumber: document.getElementById('bestScoreNumber')
+  bestScoreNumber: document.getElementById('bestScoreNumber'), 
+  navButton: document.querySelector('.navbar-toggler')
 };
 
 // Initialize the game
@@ -56,14 +57,24 @@ async function populateSelectors() {
     const { trivia_categories: categories } = await response.json();
 
     // Generate a gradient of hues for categories
-    const hueStep = 360 / categories.length;
+    const hueStep = 360 / (categories.length + 1); // Include "Any" in the gradient calculation
+
+    // Add "Any" category manually
+    const allCategories = [
+      { id: '', name: 'Any Category', color: `hsl(0, 50%, 50%)` }, // Assign the first color in the gradient
+      ...categories.map((cat, index) => ({
+        id: cat.id,
+        name: cat.name,
+        color: `hsl(${Math.round((index + 1) * hueStep)}, 50%, 50%)`, // Shift hues for other categories
+      })),
+    ];
 
     // Populate category dropdown
-    elements.categorySelector.innerHTML = categories
-      .map((cat, index) => {
-        const hue = Math.round(index * hueStep);
-        return `<option value="${cat.id}" style="border-color: hsl(${hue}, 50%, 50%);">${cat.name}</option>`;
-      })
+    elements.categorySelector.innerHTML = allCategories
+      .map(
+        (cat) =>
+          `<option value="${cat.id}" style="border-color: ${cat.color};">${cat.name}</option>`
+      )
       .join('');
     elements.categorySelector.value = state.selectedCategory;
 
@@ -481,3 +492,53 @@ document.getElementById('start-quiz-button').addEventListener('click', handleSta
 
 // Initialize the game on page load
 document.addEventListener('DOMContentLoaded', initGame);
+
+// Add event listener for the navbar toggle button
+elements.navButton.addEventListener('click', () => {
+  const navbar = document.getElementById('navbarSupportedContent');
+
+  // Check if the navbar is currently collapsed
+  const isCollapsed = navbar.classList.contains('collapse');
+
+  if (isCollapsed) {
+    // Start expanding
+    navbar.classList.remove('collapse');
+    navbar.classList.add('collapsing');
+    navbar.style.height = '0px'; // Start height at 0
+
+    elements.navButton.classList.remove('collapsed');
+    elements.navButton.setAttribute('aria-expanded', 'true');
+
+    // Simulate the expanding transition
+    setTimeout(() => {
+      navbar.style.height = '134px'; // Set height during the transition
+    }, 10); // Small delay to ensure the height change is applied
+
+    // After 1 second, complete the expand
+    setTimeout(() => {
+      navbar.classList.remove('collapsing');
+      navbar.classList.add('show');
+      navbar.style.height = ''; // Remove inline height
+    }, 1000);
+  } else {
+    // Start collapsing
+    navbar.classList.remove('show');
+    navbar.classList.add('collapsing');
+    navbar.style.height = '134px'; // Start height at full
+
+    elements.navButton.classList.add('collapsed');
+    elements.navButton.setAttribute('aria-expanded', 'false');
+
+    // Simulate the collapsing transition
+    setTimeout(() => {
+      navbar.style.height = '0px'; // Set height during the transition
+    }, 10); // Small delay to ensure the height change is applied
+
+    // After 1 second, complete the collapse
+    setTimeout(() => {
+      navbar.classList.remove('collapsing');
+      navbar.classList.add('collapse');
+      navbar.style.height = ''; // Remove inline height
+    }, 1000);
+  }
+});
